@@ -5,7 +5,7 @@
   "src/test"]
 
  :dependencies
- [[de.active-group/reacl-c "0.8.0"]]
+ [[de.active-group/reacl-c "0.9.1-SNAPSHOT"]]
 
  :dev-http {8080 "public"}
 
