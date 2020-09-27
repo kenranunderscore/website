@@ -1,14 +1,23 @@
 {
   "name": "kenranunderscore",
   "version": "0.0.1",
-  "private": true,
-  "devDependencies": {
-    "shadow-cljs": "2.11.4"
+  "description": "My website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html"
   },
-  "dependencies": {
-    "create-react-class": "^15.6.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenranunderscore/website.git"
+  },
+  "author": "Johannes Maier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kenranunderscore/website/issues"
+  },
+  "homepage": "https://github.com/kenranunderscore/website#readme",
+  "devDependencies": {
+    "parcel": "^1.12.4"
   }
 }

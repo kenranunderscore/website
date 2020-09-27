@@ -2,7 +2,8 @@
 
 pkgs.mkShell {
   buildInputs = [
+    pkgs.purescript
+    pkgs.spago
     pkgs.nodejs
-    pkgs.jdk11
   ];
 }
