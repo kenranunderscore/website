@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "spago test",
-    "dev": "parcel index.html"
+    "dev": "parcel index.html",
+    "watch": "spago build --watch"
   },
   "repository": {
     "type": "git",
