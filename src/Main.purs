@@ -8,7 +8,6 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
 import Prelude
-import Data.Foldable (traverse_)
 
 type State = { enabled :: Boolean }
 
