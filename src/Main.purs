@@ -1,42 +1,40 @@
 module Main where
 
-import Prelude
-
-import Data.Maybe (Maybe (..))
 import Effect (Effect)
-import Halogen as Halogen
-import Halogen.Aff as Aff
-import Halogen.HTML (HTML)
-import Halogen.HTML as Html
-import Halogen.HTML.Events as Events
+import Halogen as H
+import Halogen.Aff as HA
+import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
+import Prelude
+import Data.Foldable (traverse_)
 
-type State = String
+type State = { enabled :: Boolean }
 
-data Action = Hello
+data Action = Toggle
 
-main :: Effect Unit
-main = Aff.runHalogenAff do
-  body <- Aff.awaitBody
-  runUI component unit body
-
-component :: forall query input output m. Halogen.Component HTML query input output m
-component =
-  Halogen.mkComponent
+comp :: forall q i o m. H.Component q i o m
+comp = H.mkComponent
   { initialState
   , render
-  , eval : Halogen.mkEval (Halogen.defaultEval { handleAction = handleAction })
+  , eval: H.mkEval $ H.defaultEval { handleAction = handleAction }
   }
 
-initialState :: forall input. input -> State
-initialState _ = "foo"
+initialState :: forall i. i -> State
+initialState _ = { enabled: false }
 
-render :: forall m. State -> Halogen.ComponentHTML Action () m
+render :: forall m. State -> H.ComponentHTML Action () m
 render state =
-  Html.button [ Events.onClick \_ -> Just Hello ] [ Html.text state ]
+  let label = if state.enabled then "on" else "off"
+  in HH.button [ HP.title label, HE.onClick \_ -> Toggle ] [ HH.text label ]
 
-handleAction
-  :: forall output m. Action
-  -> Halogen.HalogenM State Action () output m Unit
+handleAction :: forall o m. Action -> H.HalogenM State Action () o m Unit
 handleAction = case _ of
-  Hello -> Halogen.modify_ \state -> "Hello!"
+  Toggle ->
+    H.modify_ \st -> st { enabled = not st.enabled }
+
+main :: Effect Unit
+main = HA.runHalogenAff do
+  body <- HA.awaitBody
+  runUI comp unit body

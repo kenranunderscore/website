@@ -1,16 +1,16 @@
-var Main = require('./output/Main');
-
-function main() {
-    Main.main();
-}
-
 if (module.hot) {
-    module.hot.accept(function() {
-        console.log('Reloaded, running main again');
-        main();
+    module.hot.accept(function () {
+        console.log('reloading...');
+    });
+
+    module.hot.dispose(function () {
+        console.log('disposing...');
+        // FIXME(Johannes): this looks like it's not the way to go,
+        // but it's hard to find good information on this.
+        document.body.innerHTML = '';
     });
 }
 
-console.log('Starting app');
+console.log('Initial startup');
 
-main();
+require('./output/Main').main();
