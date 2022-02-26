@@ -1,0 +1,27 @@
+* First blog post
+
+Example text with some =verbatim stuff=, and some ~code here~.
+
+This is
+- a list
+- of things
+- with bullet points.
+
+Some /italic text/ and some *bold text* as well.
+
+Now for code. Haskell:
+
+#+begin_src haskell
+data Foo = Bar | Baz Int
+  deriving stock (Eq, Show)
+#+end_src
+
+Clojure:
+
+#+begin_src clojure
+(defrecord Rec [field])
+
+(defun foo [x]
+  (fn [a]
+    (->Rec (+ a x))))
+#+end_src

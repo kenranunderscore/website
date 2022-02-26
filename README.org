@@ -1,0 +1,5 @@
+* My personal website powered by =org-mode= (WIP)
+
+This currently serves as a playground to try writing some sort of
+"website" and/or "blog".  I don't know yet whether this will grow into
+something I'd like to pursue further.
