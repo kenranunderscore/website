@@ -1,4 +1,5 @@
 (require 'ox-publish)
+(require 'f)
 
 ;; If the file is loaded via emacs -l, `load-file-name' is set to its
 ;; file path.  Otherwise we assume we're running interactively from
@@ -24,7 +25,10 @@
         :exclude "README.org"
         :publishing-directory publish-dir
         :with-toc nil
-        :section-numbers nil)
+        :section-numbers nil
+        :html-doctype "html5"
+        :html-html5-fancy t
+        :html-head-include-default-style nil)
        (list
         "blog-entries"
         :base-directory (concat base-dir "blog/")
@@ -37,10 +41,15 @@
         :auto-sitemap t
         :sitemap-filename "all-entries.org"
         :sitemap-sort-files 'anti-chronologically
-        :sitemap-title nil)
+        :sitemap-title nil
+        :html-doctype "html5"
+        :html-html5-fancy t
+        :html-head-include-default-style nil
+        :html-head-include-scripts nil
+        :html-preamble (f-read-text "assets/nav.html"))
        (list
         "static"
-        :base-directory base-dir
+        :base-directory (concat base-dir "assets/")
         :base-extension "css\\|text\\|jpg\\|png"
         :recursive t
         :publishing-directory publish-dir
