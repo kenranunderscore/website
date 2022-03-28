@@ -1,13 +1,4 @@
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
-(package-refresh-contents)
-
-;; These language packages in particular are necessary for the CSS
-;; generation of `htmlize' to work.
-(dolist (p '(f htmlize haskell-mode clojure-mode nix-mode))
-  (unless (package-installed-p p)
-    (package-install p)))
 
 ;; Output CSS classes for syntax highlighting instead of inline CSS by
 ;; default.
