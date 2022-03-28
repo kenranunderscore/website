@@ -1,5 +1,20 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(package-refresh-contents)
+
+;; These language packages in particular are necessary for the CSS
+;; generation of `htmlize' to work.
+(dolist (p '(f htmlize haskell-mode clojure-mode nix-mode))
+  (unless (package-installed-p p)
+    (package-install p)))
+
+;; Output CSS classes for syntax highlighting instead of inline CSS by
+;; default.
+(require 'htmlize)
+(setq org-html-htmlize-output-type 'css)
+
 (require 'ox-publish)
-(require 'f)
 
 ;; If the file is loaded via emacs -l, `load-file-name' is set to its
 ;; file path.  Otherwise we assume we're running interactively from
@@ -11,11 +26,10 @@
         default-directory))
 (setq publish-dir (concat base-dir "html/"))
 
-;; NOTE: For now I assume that I'm publishing interactively from
-;; within my Emacs, with my personal configuration loaded.  I'd
-;; otherwise have to set some more customization options here, as well
-;; as load a couple of packages (htmlize, for instance).
+(require 'f)
 
+;; The final website consists of some special top-level pages,
+;; "generic" blog entries, and stuff that is served statically.
 (setq org-publish-project-alist
       (list
        (list
@@ -24,17 +38,20 @@
         :base-extension "org"
         :exclude "README.org"
         :publishing-directory publish-dir
+        :publishing-function 'org-html-publish-to-html
         :with-toc nil
         :section-numbers nil
         :html-doctype "html5"
         :html-html5-fancy t
-        :html-head-include-default-style nil)
+        :html-head-include-default-style nil
+        :htmlized-source t)
        (list
         "blog-entries"
         :base-directory (concat base-dir "blog/")
         :base-extension "org"
         :recursive t
         :publishing-directory (concat publish-dir "blog/")
+        :publishing-function 'org-html-publish-to-html
         :with-date t
         :with-title t
         :with-toc nil
@@ -46,7 +63,8 @@
         :html-html5-fancy t
         :html-head-include-default-style nil
         :html-head-include-scripts nil
-        :html-preamble (f-read-text "assets/nav.html"))
+        :html-preamble (f-read-text "assets/nav.html")
+        :htmlized-source t)
        (list
         "static"
         :base-directory (concat base-dir "assets/")
@@ -57,3 +75,6 @@
        (list
         "final-website"
         :components '("top-level-pages" "blog-entries" "static"))))
+
+;; Publish all projects, and force (re)creation of HTML.
+(org-publish-all t)

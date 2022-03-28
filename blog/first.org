@@ -16,6 +16,17 @@ data Foo = Bar | Baz Int
   deriving stock (Eq, Show)
 #+end_src
 
+#+begin_src elisp
+(defun (foo bar)
+  (setq foo "abc")
+  (setq bar 'blub))
+#+end_src
+
+#+begin_src nix
+let f = drv: drv + ./foo + "abc";
+in { a = import https://hi.git; b = "${./bla}" }
+#+end_src
+
 Clojure:
 
 #+begin_src clojure
