@@ -32,6 +32,7 @@
         :publishing-directory publish-dir
         :publishing-function 'org-html-publish-to-html
         :with-toc nil
+        :with-date nil
         :section-numbers nil
         :html-doctype "html5"
         :html-html5-fancy t
@@ -44,9 +45,10 @@
         :recursive t
         :publishing-directory (concat publish-dir "emacs-config/")
         :publishing-function 'org-html-publish-to-html
-        :with-date nil
+        :with-date t
         :with-title t
         :with-toc t
+        :with-author nil
         :html-doctype "html5"
         :html-html5-fancy t
         :html-head-include-default-style nil
@@ -61,6 +63,7 @@
         :publishing-directory (concat publish-dir "blog/")
         :publishing-function 'org-html-publish-to-html
         :with-date t
+        :with-author nil
         :with-title t
         :with-toc nil
         :auto-sitemap t
