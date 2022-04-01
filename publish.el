@@ -6,6 +6,7 @@
 (setq org-html-htmlize-output-type 'css)
 
 (require 'ox-publish)
+(setq org-html-validation-link nil)
 
 ;; If the file is loaded via emacs -l, `load-file-name' is set to its
 ;; file path.  Otherwise we assume we're running interactively from
