@@ -2,6 +2,10 @@
 
 This should grow into something, maybe.
 
+* Literate GNU Emacs configuration
+
+It's [[file:emacs-config/config.org][here]].
+
 * Blog entries
 #+HTML: <div>
 #+INCLUDE: "blog/all-entries.org" :lines "3-"

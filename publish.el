@@ -37,6 +37,22 @@
         :html-head-include-default-style nil
         :htmlized-source t)
        (list
+        "emacs-config"
+        :base-directory (concat base-dir "emacs-config/")
+        :base-extension "org"
+        :recursive t
+        :publishing-directory (concat publish-dir "emacs-config/")
+        :publishing-function 'org-html-publish-to-html
+        :with-date nil
+        :with-title t
+        :with-toc t
+        :html-doctype "html5"
+        :html-html5-fancy t
+        :html-head-include-default-style nil
+        :html-head-include-scripts nil
+        :html-preamble (f-read-text "assets/nav.html")
+        :htmlized-source t)
+       (list
         "blog-entries"
         :base-directory (concat base-dir "blog/")
         :base-extension "org"
