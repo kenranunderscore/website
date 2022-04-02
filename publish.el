@@ -85,7 +85,7 @@
         :publishing-function 'org-publish-attachment)
        (list
         "final-website"
-        :components '("top-level-pages" "blog-entries" "static"))))
+        :components '("top-level-pages" "emacs-config" "blog-entries" "static"))))
 
 ;; Publish all projects, and force (re)creation of HTML.
 (org-publish-all t)
