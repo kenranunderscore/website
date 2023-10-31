@@ -1,3 +1,0 @@
-#+TITLE: Sitemap for project blog-entries
-
-- [[file:first.org][first]]
