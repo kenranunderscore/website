@@ -1,39 +1,46 @@
-cabal-version:      3.0
-name:               website
-version:            0.1.0.0
-license:            MIT
-license-file:       LICENSE
-author:             Johannes Maier
-maintainer:         johannes.maier@mailbox.org
-category:           Web
-build-type:         Simple
+cabal-version: 3.0
+name:          website
+version:       0.1.0.0
+license:       MIT
+license-file:  LICENSE
+author:        Johannes Maier
+maintainer:    johannes.maier@mailbox.org
+category:      Web
+build-type:    Simple
 
 common warnings
-    ghc-options: -Wall
+  ghc-options: -Wall
 
 library
-    import:           warnings
-    exposed-modules:  MyLib
-    build-depends:    base
-    hs-source-dirs:   src-lib
-    default-language: GHC2021
+  import:           warnings
+  exposed-modules:  Website.Main
+  build-depends:
+    , base
+    , lucid
+    , servant
+    , servant-lucid
+    , servant-server
+    , warp
+
+  hs-source-dirs:   src-lib
+  default-language: GHC2021
 
 executable server
-    import:           warnings
-    main-is:          Main.hs
-    build-depends:
-        base,
-        website
+  import:           warnings
+  main-is:          Main.hs
+  build-depends:
+    , base
+    , website
 
-    hs-source-dirs:   src-exe
-    default-language: GHC2021
+  hs-source-dirs:   src-exe
+  default-language: GHC2021
 
 test-suite website-test
-    import:           warnings
-    default-language: GHC2021
-    type:             exitcode-stdio-1.0
-    hs-source-dirs:   test
-    main-is:          Main.hs
-    build-depends:
-        base,
-        website
+  import:           warnings
+  default-language: GHC2021
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Main.hs
+  build-depends:
+    , base
+    , website
