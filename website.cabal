@@ -9,7 +9,7 @@ category:      Web
 build-type:    Simple
 
 common warnings
-  ghc-options: -Wall
+  ghc-options: -Wall -Werror=missing-fields
 
 library
   import:           warnings
