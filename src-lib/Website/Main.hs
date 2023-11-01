@@ -10,7 +10,8 @@ import Lucid qualified as L
 import Network.Wai.Handler.Warp qualified as Warp
 
 data Routes' mode = MkRoutes
-  { getIndex :: mode :- "foo" :> Get '[HTML] (L.Html ())
+  { getIndex :: mode :- Get '[HTML] (L.Html ())
+  , static :: mode :- "resources" :> Raw
   }
   deriving stock (Generic)
 
@@ -20,8 +21,10 @@ main :: IO ()
 main = do
   Warp.run 8080 $ serve (Proxy @Routes) server
   where
-    server = MkRoutes { getIndex = getIndexHandler }
+    server = MkRoutes { getIndex = getIndexHandler
+                      , static = serveDirectoryWebApp "./resources" }
 
 getIndexHandler :: Handler (L.Html ())
 getIndexHandler = pure $ do
-  L.p_ $ L.b_ "Hi from Lucid!"
+  L.head_ $ L.script_ [L.src_ "./resources/htmx.min.js"] (mempty :: String)
+  L.body_ $ L.p_ "Lucid with htmx, fuck yeah"
